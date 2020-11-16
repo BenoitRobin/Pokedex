@@ -1,5 +1,7 @@
 <script>
   import Searchbar from "./Searchbar.svelte";
+  import Card from "./Card.svelte";
+  import { v4 as uuidv4 } from "uuid";
 
   let allPokemon = [];
   let tableauFin = [];
@@ -34,31 +36,45 @@
 
             allPokemon.push(objetPokemonFull);
             tableauFin = allPokemon.slice(0, 20);
+            allPokemon = allPokemon;
           });
       });
+  }
+
+  function goRecherche(event) {
+    // console.log(event.detail.txt);
+    let contenuResearch = event.detail.txt;
+    tableauFin = allPokemon.filter((el) => el.name.includes(contenuResearch));
   }
 </script>
 
 <!-- MON STYLE -->
 <style type="text/scss">
+  .scroll-container {
+    overflow: scroll;
+  }
   .container {
     max-width: 1400px;
-    width: 95%;
-    padding: 0 50px;
+    height: 45vh;
+    width: 85%;
     margin: 0 auto;
+    background-color: #fff;
+    box-shadow: inset 5px 5px 6px 0px #2b90d9;
 
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
+    border-radius: 10px;
   }
 </style>
 
 <!-- MON CODE -->
 
-<Searchbar />
-<main class="container">
-  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique est
-  facilis quos sit sequi ea accusamus repellat aliquam minima tempora, quo
-  blanditiis assumenda, dolorum vel dolores quisquam officiis eligendi.
-  Officiis.
+<Searchbar on:recherche-pokemon={goRecherche} />
+
+<main class="container scroll-container">
+  {#each tableauFin as pokemon (uuidv4())}
+    <Card name={pokemon.name} pic={pokemon.pic} />
+  {/each}
 </main>

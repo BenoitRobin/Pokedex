@@ -1,4 +1,14 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
+  let recherche = "";
+
+  function rechercheFunc() {
+    // console.log(recherche);
+    dispatch("recherche-pokemon", { txt: recherche });
+    recherche = "";
+  }
 </script>
 
 <!-- MON STYLE -->
@@ -11,6 +21,7 @@
 
     display: flex;
     flex-direction: column;
+    position: relative;
     & label {
       font-size: 2rem;
       font-weight: 500;
@@ -58,8 +69,12 @@
 
 <!-- MON CODE -->
 
-<form class="form-search">
+<form class="form-search" on:submit|preventDefault={rechercheFunc}>
   <label for="recherche">Cherchez un pokémon :</label>
-  <input type="text" id="recherche" placeholder="Recherchez votre pokémon..." />
+  <input
+    bind:value={recherche}
+    type="text"
+    id="recherche"
+    placeholder="Recherchez votre pokémon..." />
   <button type="submit">Envoyer</button>
 </form>

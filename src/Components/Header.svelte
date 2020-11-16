@@ -1,6 +1,7 @@
 <script>
 </script>
 
+<!-- MON STYLE -->
 <style type="text/scss">
   .header {
     background-color: #9baec8;
@@ -23,6 +24,8 @@
     }
   }
 </style>
+
+<!-- MON CODE -->
 
 <section class="header">
   <h1 class="header-title">Pokédex App Svelte</h1>

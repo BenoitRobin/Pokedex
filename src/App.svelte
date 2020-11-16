@@ -3,10 +3,6 @@
   import Content from "./Components/Content.svelte";
 </script>
 
-<style type="text/scss">
-  @import "./styles/vars";
-</style>
-
 <!-- MON CODE -->
 
 <Header />
